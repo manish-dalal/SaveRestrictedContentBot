@@ -44,18 +44,23 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i):
         chat = int('-100' + str(msg_link.split("/")[-2]))
         try:
             msg = await userbot.get_messages(chat, msg_id)
-            if msg.media:
-                if 'web_page' in msg.media:
-                    edit = await client.edit_message_text(sender, edit_id, "Cloning.")
-                    await client.send_message(sender, msg.text.markdown)
-                    await edit.delete()
-                    return
-            if not msg.media:
-                if msg.text:
-                    edit = await client.edit_message_text(sender, edit_id, "Cloning.")
-                    await client.send_message(sender, msg.text.markdown)
-                    await edit.delete()
-                    return
+            if msg.text:
+                await client.send_message(sender, msg.text)
+                return
+
+            
+            # if msg.media:
+            #     if 'MessageMediaType.WEB_PAGE' in msg.media:
+            #         edit = await client.edit_message_text(sender, edit_id, "Cloning.")
+            #         await client.send_message(sender, msg.text)
+            #         await edit.delete()
+            #         return
+            # if not msg.media:
+            #     if msg.text:
+            #         edit = await client.edit_message_text(sender, edit_id, "Cloning.")
+            #         await client.send_message(sender, msg.text)
+            #         await edit.delete()
+            #         return
             edit = await client.edit_message_text(sender, edit_id, "Trying to Download.")
             file = await userbot.download_media(
                 msg,
@@ -67,6 +72,7 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i):
                     time.time()
                 )
             )
+            print("file@@@", file)
             await edit.edit('Preparing to Upload!')
             caption = str(file)
             if msg.caption is not None:
@@ -117,6 +123,7 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i):
             await client.edit_message_text(sender, edit_id, "Have you joined the channel?")
             return 
         except Exception as e:
+            print("error", e)
             await client.edit_message_text(sender, edit_id, f'Failed to save: `{msg_link}`')
             return 
     else:
