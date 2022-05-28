@@ -45,7 +45,9 @@ async def get_msg(userbot, client, sender, edit_id, msg_link, i):
         try:
             msg = await userbot.get_messages(chat, msg_id)
             if msg.text:
+                edit = await client.edit_message_text(sender, edit_id, "Cloning.")
                 await client.send_message(sender, msg.text)
+                await edit.delete()
                 return
 
             
