@@ -48,6 +48,7 @@ async def clone(event):
     u_len = len(urls)
 
     for j in range(u_len):
+        time.sleep(0.2)
         new_link = urls[j]
         edit = await event.reply("Processing!")
 
