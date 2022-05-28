@@ -1,6 +1,7 @@
 #Github.com/Vasusen-code
 
 import time, os
+import re
 
 from .. import bot as Drone
 from .. import userbot, Bot
@@ -32,15 +33,28 @@ async def clone(event):
             return
     except TypeError:
         return
-    s, r = await force_sub(event.client, fs, event.sender_id, ft)
-    if s == True:
-        await event.reply(r)
-        return
-    edit = await event.reply("Processing!")
-    if 't.me/+' in link:
-        q = await join(userbot, link)
-        await edit.edit(q)
-        return 
-    if 't.me/' in link:
-        await get_msg(userbot, Bot, event.sender_id, edit.id, link, 0)
-        
+    # s, r = await force_sub(event.client, fs, event.sender_id, ft)
+    # if s == True:
+    #     await event.reply(r)
+    #     return
+
+    list_string = event.message.message.splitlines()
+    ml_string = ' \n'.join(list_string)
+    new_ml_string = list(map(str, ml_string.split(" ")))
+
+    new_join_str = " ".join(new_ml_string)
+
+    urls = re.findall(r'(https?://[^\s]+)', new_join_str)
+    u_len = len(urls)
+
+    for j in range(u_len):
+        new_link = urls[j]
+        edit = await event.reply("Processing!")
+
+        print("new_link", new_link)
+        if 't.me/+' in new_link:
+            q = await join(userbot, new_link)
+            await edit.edit(q)
+            return 
+        if 't.me/' in new_link:
+            await get_msg(userbot, Bot, event.sender_id, edit.id, new_link, 0)        
