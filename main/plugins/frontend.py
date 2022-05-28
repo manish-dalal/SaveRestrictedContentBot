@@ -50,6 +50,7 @@ async def clone(event):
     for j in range(u_len):
         new_link = urls[j]
         edit = await event.reply("Processing!")
+        time.sleep(0.2)
 
         print("new_link", new_link)
         if 't.me/+' in new_link:
