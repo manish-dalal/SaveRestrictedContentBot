@@ -64,7 +64,7 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
                     time.time()
                 )
             )
-            print("file@@@", file)
+            # print("file@@@", file)
             await edit.edit('Preparing to Upload!')
             caption = None
             if msg.caption is not None:
@@ -202,7 +202,7 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
     else:
         edit = await client.edit_message_text(sender, edit_id, "Cloning.")
         chat =  msg_link.split("t.me")[1].split("/")[1]
-        print("chat", chat, "msg_id", msg_id)
+        # print("chat", chat, "msg_id", msg_id)
         try:
             msg = await client.get_messages(chat, msg_id)
             if msg.empty:
