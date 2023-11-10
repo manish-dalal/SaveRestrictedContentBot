@@ -3,6 +3,7 @@
 </h1> 
 
 Contact: [Telegram](https://t.me/MaheshChauhan)
+https://github.com/vasusen-code/SaveRestrictedContentBot
 
 A stable telegram bot to get restricted messages with custom thumbnail support , made by Mahesh Chauhan. 
 

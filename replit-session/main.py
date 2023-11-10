@@ -22,6 +22,7 @@ if s_l == "p":
 	app = pyrogram.Client(":memory:", api_id=APP_ID, api_hash=API_HASH)
 	app.start()
 	session_str = app.export_session_string()
+	print("session_str=", session_str)
 	s_m = app.send_message("me", session_str)
 	s_m.reply_text(
 	    "⬆️ This StringSession is generated using https://replit.com/@SpEcHiDe/GenerateStringSession \nPlease subscribe @UniBorg ",
@@ -39,6 +40,7 @@ elif s_l == "t":
 	client = TelegramClient(StringSession(), APP_ID, API_HASH)
 	client.start()
 	session_str = client.session.save()
+	print("session_str=", session_str)
 	s_m = client.send_message("me", session_str)
 	s_m.reply(
 	    "⬆️ This StringSession is generated using https://replit.com/@SpEcHiDe/GenerateStringSession! \nPlease subscribe @UniBorg "

@@ -1,8 +1,10 @@
 #Github.com-Vasusen-code
-# pip3 uninstall -y -r <(pip3 freeze)
-ethon
+
+https://github.com/manish-dalal/Telethon/archive/refs/tags/v1.24.0.zip
+https://github.com/manish-dalal/ethon/archive/refs/tags/v0.1.5.zip
 cryptg
 tgcrypto
-pyrogram==1.4.16
+pyrogram==2.0.106
+python-decouple
 flask
 gunicorn
