@@ -43,14 +43,14 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
             msg = await userbot.get_messages(chat, msg_id)
             if msg.media:
                 if msg.media==MessageMediaType.WEB_PAGE:
-                    edit = await client.edit_message_text(sender, edit_id, "Cloning.")
+                    edit = await client.edit_message_text(sender, edit_id, "Cloning webpage.")
                     await client.send_message(sender, msg.text.markdown)
                     await edit.delete()
                     return
             if not msg.media:
                 if msg.text:
-                    edit = await client.edit_message_text(sender, edit_id, "Cloning.")
-                    await client.send_message(sender, msg.text.markdown)
+                    edit = await client.edit_message_text(sender, edit_id, "Cloning text.")
+                    await client.send_message(sender, msg.text)
                     await edit.delete()
                     return
             edit = await client.edit_message_text(sender, edit_id, "Trying to Download.")
@@ -156,7 +156,7 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
                 new_link = f"t.me/b/{chat}/{msg_id}"
             # return await get_msg(userbot, client, bot, sender, edit_id, msg_link, i)
         except Exception as e:
-            print(e)
+            print("Exception111", e)
             if "messages.SendMedia" in str(e) \
             or "SaveBigFilePartRequest" in str(e) \
             or "SendMediaRequest" in str(e) \
@@ -200,7 +200,7 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
             pass
         await edit.delete()
     else:
-        edit = await client.edit_message_text(sender, edit_id, "Cloning.")
+        edit = await client.edit_message_text(sender, edit_id, "Cloning public msg.")
         chat =  msg_link.split("t.me")[1].split("/")[1]
         # print("chat", chat, "msg_id", msg_id)
         try:
@@ -208,7 +208,7 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
             if msg.empty:
                 new_link = f't.me/b/{chat}/{int(msg_id)}'
                 #recurrsion 
-                # return await get_msg(userbot, client, bot, sender, edit_id, new_link, i)
+                return await get_msg(userbot, client, bot, sender, edit_id, new_link, i)
             await client.copy_message(sender, chat, msg_id)
         except Exception as e:
             print(e)
